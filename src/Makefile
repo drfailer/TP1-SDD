@@ -1,9 +1,9 @@
 CC = gcc
-CFLAGS = -Wall -Wextra -g
+CFLAGS = -Wall -Wextra
 LDFLAGS =
 
-prog: main.c
-	$(CC) $(LDFLAGS) -o $@ $^
+prog: main.c util.c
+	$(CC) $(CFLAGS) -o $@ $^ -g
 
 clean:
 	rm prog

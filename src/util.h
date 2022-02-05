@@ -1,6 +1,8 @@
 #ifndef __UTIL__
 #define __UTIL__
 #include <stdlib.h>
+#include <stdio.h>
+#include <string.h>
 
 
 /* STRUCTURES: */
@@ -29,5 +31,12 @@ typedef struct agenda {
   tache_t *actions;
   struct agenda *suiv;
 } agenda_t;
+
+/* FONCTIONS: */
+
+void afficheAgendaElt(agenda_t *agendaElt);
+agenda_t *agendaViafichier(char *nom);
+void afficheAgenda(agenda_t *agenda);
+void freelst(agenda_t **agenda);
 
 #endif
