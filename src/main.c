@@ -1,6 +1,9 @@
 #include "util.h"
+#include "agenda.h"
+#include "tache.h"
 #include <stdio.h>
 
+// ce qu'on a fait à la première séance:
 /* void test1() { */
 /*   char *test = (char *)malloc(50 * sizeof(char)); */
 /*   agenda_t *agendaElt; */

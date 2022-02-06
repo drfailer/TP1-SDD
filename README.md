@@ -7,8 +7,8 @@ TODOS:
 ------
 
 - [x] parser ligne fichier
-- [ ] ajout trié
-- [ ] comparer deux elements
-- [ ] parser doc
+- [x] ajout trié
+- [ ] faire plus de tests sur ajout
+- [x] parser doc
 - [ ] sauvegarde
 - [ ] suppression
