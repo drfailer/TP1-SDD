@@ -2,8 +2,8 @@ CC = gcc
 CFLAGS = -Wall -Wextra
 LDFLAGS =
 
-prog: main.c util.c agenda.c tache.c
-	$(CC) $(CFLAGS) -o $@ $^ -g
+prog: main.c util.c agenda.c tache.c agenda.h tache.h util.h
+	$(CC) $(CFLAGS) -o $@ *.c -g
 
 clean:
 	rm prog

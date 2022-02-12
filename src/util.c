@@ -13,14 +13,7 @@
  * TODO: trouver une meilleur alternative à ces fonctions
  */
 
-void cpyTab(unsigned short int *dest, unsigned short int *src, int n) {
-  int i;
-  for (i = 0; i < n; ++i) {
-    dest[i] = src[i];
-  }
-}
-
-void cpyCharTab(char *dest, char *src, int n) {
+void cpyTab(char *dest, char *src, int n) {
   int i;
   for (i = 0; i < n; ++i) {
     dest[i] = src[i];
@@ -30,10 +23,10 @@ void cpyCharTab(char *dest, char *src, int n) {
 /* récupère une suite de `n` nombres et les met dans tab
  * retourne le pointeur `s`
  */
-char *parseSuiteNombres(char *s, unsigned short int tab[], int n) {
+char *parseSuiteNombres(char *s, char tab[], int n) {
   int i;
   for (i = 0; *s && i < n; ++i, ++s) {
-    tab[i] = *s - '0';
+    tab[i] = *s;
   }
   return s;
 }
