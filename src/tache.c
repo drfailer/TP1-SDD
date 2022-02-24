@@ -1,20 +1,19 @@
-#include <stdlib.h>
-#include <string.h>
 #include "tache.h"
 #include "util.h"
-
+#include <stdlib.h>
+#include <string.h>
 
 /*****************************************************************************/
 /* CONSTRUCTEUR ET DESTRUCTEUR                                               */
 /*****************************************************************************/
 
 /* allocation dynamique et initialisation des champs d'un nouvelle tache_t */
-tache_t *creeTache(char j, char heure[3], char nom[10]) {
+tache_t *creeTache(char j, char heure[TAILLE_HEURE], char nom[TAILLE_NOM]) {
   tache_t *tache = (tache_t *)malloc(sizeof(tache_t));
   if (tache != NULL) {
     tache->j = j;
     strcpy(tache->heure, heure);
-    cpyTab(tache->nom, nom, 10);
+    strcpy(tache->nom, nom);
     tache->suiv = NULL;
   }
   return tache;
@@ -42,7 +41,8 @@ void freeTache(tache_t **tache) {
 /* Ajout un élément dans la liste triée qui contient les actions à réaliser
  * pour un élément de l'agenda (liste principale)
  */
-tache_t *ajouteTache(tache_t *tache, jour_t jour, char heure[3], char nom[10]) {
+tache_t *ajouteTache(tache_t *tache, jour_t jour, char heure[TAILLE_HEURE],
+                     char nom[TAILLE_NOM]) {
   int r = -1;
   tache_t **prec = &tache;
   tache_t *tmp;
@@ -63,6 +63,26 @@ tache_t *ajouteTache(tache_t *tache, jour_t jour, char heure[3], char nom[10]) {
   return tache;
 }
 
+/* supprime la tache programmée pour `jour` à `heure` dans une liste de taches
+ */
+tache_t *supprimeTache(tache_t *tache, jour_t jour, char heure[TAILLE_HEURE]) {
+  int r = -1;
+  tache_t **prec = &tache;
+  tache_t *tmp;
+
+  while (*prec != NULL && r < 0) {
+    r = compTache(*prec, jour, heure);
+    if (r < 0)
+      prec = &(*prec)->suiv;
+  }
+  if (r == 0) {
+    tmp = *prec;
+    *prec = (*prec)->suiv;
+    free(tmp);
+  }
+  return tache;
+}
+
 /*****************************************************************************/
 /* FONCTIONS DE DIVERSES                                                     */
 /*****************************************************************************/
@@ -70,7 +90,7 @@ tache_t *ajouteTache(tache_t *tache, jour_t jour, char heure[3], char nom[10]) {
 /* compare une tache à un jour et une heure (utilisé pour insertion dans liste
  * triée)
  */
-int compTache(tache_t *elt, char j, char heure[3]) {
+int compTache(tache_t *elt, char j, char heure[TAILLE_HEURE]) {
   int resultat = 0;
   int i = 0;
   resultat = elt->j - j;
@@ -80,5 +100,3 @@ int compTache(tache_t *elt, char j, char heure[3]) {
   }
   return resultat;
 }
-
-

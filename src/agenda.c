@@ -4,13 +4,15 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#define TAILLE_BUFFER                                                          \
+  TAILLE_ANNEE + TAILLE_SEMAINE + TAILLE_HEURE + TAILLE_NOM - 1
 
 /*****************************************************************************/
 /* CONSTRUCTEUR ET DESTRUCTEUR                                               */
 /*****************************************************************************/
 
 /* allocation dynamique et initialisation des champs d'un nouvel agenda_t */
-agenda_t *creeAgenda(char annee[5], char semaine[3]) {
+agenda_t *creeAgenda(char annee[TAILLE_ANNEE], char semaine[TAILLE_SEMAINE]) {
   agenda_t *agenda = (agenda_t *)malloc(sizeof(agenda_t));
   if (agenda != NULL) {
     stpcpy(agenda->annee, annee);
@@ -43,22 +45,23 @@ void freelst(agenda_t **agenda) {
 /* FONCTIONS DE MANIPULATION DE LA LISTE                                     */
 /*****************************************************************************/
 
-void parseLigne(char *s, char annee[5], char semaine[3], jour_t *jour,
-                char heure[3], char nom[10]) {
-  s = parseSuiteNombres(s, annee, 4);
-  annee[4] = 0;
-  s = parseSuiteNombres(s, semaine, 2);
-  semaine[2] = 0;
+void parseLigne(char *s, char annee[TAILLE_ANNEE], char semaine[TAILLE_SEMAINE],
+                jour_t *jour, char heure[TAILLE_HEURE], char nom[TAILLE_NOM]) {
+  s = parseSuiteNombres(s, annee, TAILLE_ANNEE - 1);
+  annee[TAILLE_ANNEE - 1] = 0;
+  s = parseSuiteNombres(s, semaine, TAILLE_SEMAINE - 1);
+  semaine[TAILLE_SEMAINE - 1] = 0;
   *jour = *s - '0';
-  s = parseSuiteNombres(s + 1, heure, 2);
-  heure[2] = 0;
-  cpyTab(nom, s, 10);
+  s = parseSuiteNombres(s + 1, heure, TAILLE_HEURE - 1);
+  heure[TAILLE_HEURE - 1] = 0;
+  strncpy(nom, s, TAILLE_NOM - 1);
 }
 
 /* Ajoute un élément dans la liste triée qui contient les éléments de l'agenda
  */
-agenda_t *ajouteAgenda(agenda_t *agenda, char annee[5], char semaine[3],
-                       jour_t jour, char heure[3], char nom[10]) {
+agenda_t *ajouteAgenda(agenda_t *agenda, char annee[TAILLE_ANNEE],
+                       char semaine[TAILLE_SEMAINE], jour_t jour,
+                       char heure[TAILLE_HEURE], char nom[TAILLE_NOM]) {
   int r = -1;
   agenda_t **prec = &agenda;
   agenda_t *tmp;
@@ -93,16 +96,16 @@ agenda_t *ajouteAgenda(agenda_t *agenda, char annee[5], char semaine[3],
 agenda_t *agendaViafichier(char *nom) {
   FILE *f = fopen(nom, "r");
   agenda_t *agenda = NULL;
-  char buff[30];
-  char nomAction[10];
-  char annee[5];
-  char semaine[3];
+  char buff[TAILLE_BUFFER];
+  char nomAction[TAILLE_NOM];
+  char annee[TAILLE_ANNEE];
+  char semaine[TAILLE_SEMAINE];
   jour_t jour;
-  char heure[3];
+  char heure[TAILLE_HEURE];
 
   if (f != NULL) {
     while (!feof(f)) {
-      fgets(buff, 30, f);
+      fgets(buff, TAILLE_BUFFER, f);
       parseLigne(buff, annee, semaine, &jour, heure, nomAction);
       agenda = ajouteAgenda(agenda, annee, semaine, jour, heure, nomAction);
     }
@@ -117,27 +120,14 @@ agenda_t *agendaViafichier(char *nom) {
 /* FONCTIONS DE DIVERSES                                                     */
 /*****************************************************************************/
 
-tache_t *supprimeTache(tache_t *tache, jour_t jour, char heure[3]) {
-  int r = -1;
-  tache_t **prec = &tache;
-  tache_t *tmp;
-
-  while (*prec != NULL && r < 0) {
-    r = compTache(*prec, jour, heure);
-    if (r < 0)
-      prec = &(*prec)->suiv;
-  }
-  /* si on a pas déjà une action le meme jour à la même heure */
-  if (r != 0) {
-    tmp = *prec;
-    *prec = (*prec)->suiv;
-    free(tmp);
-  }
-  return tache;
-}
-
-agenda_t *supprimeElt(agenda_t *agenda, char annee[5], char semaine[3],
-                      jour_t jour, char heure[3]) {
+/* Recherche l'élément de l'agenda programmé à `annee`, `semaine` pour `jour` à
+ * `heure` et supprime la tache correspondante.
+ * L'élément de l'agenda est aussi supprimé si la liste d'action à effectuer
+ * est vide
+ */
+agenda_t *supprimeElt(agenda_t *agenda, char annee[TAILLE_ANNEE],
+                      char semaine[TAILLE_SEMAINE], jour_t jour,
+                      char heure[TAILLE_HEURE]) {
   int r = -1;
   agenda_t **prec = &agenda;
   agenda_t *tmp;
@@ -149,6 +139,7 @@ agenda_t *supprimeElt(agenda_t *agenda, char annee[5], char semaine[3],
   }
   if (r == 0) {
     (*prec)->actions = supprimeTache((*prec)->actions, jour, heure);
+    // supprime l'élément si il n'y a plus d'actions
     if ((*prec)->actions == NULL) {
       tmp = *prec;
       *prec = (*prec)->suiv;
@@ -161,36 +152,31 @@ agenda_t *supprimeElt(agenda_t *agenda, char annee[5], char semaine[3],
 /* compare un élément de l'agenda à une annee et un numéro de semaine (utilisé
  * pour ginsertion dans liste triée)
  */
-int compAgendaElt(agenda_t *elt, char annee[5], char semaine[3]) {
+int compAgendaElt(agenda_t *elt, char annee[TAILLE_ANNEE],
+                  char semaine[TAILLE_SEMAINE]) {
   int resultat = 0;
-  int i = 0;
 
   // compare l'annee:
-  while (resultat == 0 && i < 4) {
-    resultat = elt->annee[i] - annee[i];
-    ++i;
-  }
-  i = 0;
+  resultat = strcmp(annee, elt->annee);
   // compare la semaine
-  while (resultat == 0 && i < 2) {
-    resultat = elt->semaine[i] - semaine[i];
-    ++i;
+  if (resultat == 0) {
+    resultat = strcmp(elt->semaine, semaine);
   }
   return resultat;
 }
 
 void tacheToString(tache_t *tache, char buff[]) {
-  buff[6] = tache->j + '0';
-  buff[7] = 0;
+  buff[TAILLE_ANNEE + TAILLE_SEMAINE - 2] = tache->j + '0';
+  buff[TAILLE_ANNEE + TAILLE_SEMAINE - 1] = 0;
   strcat(buff, tache->heure);
-  strncat(buff, tache->nom, 10);
-  buff[19] = 0;
+  strncat(buff, tache->nom, TAILLE_NOM);
+  buff[TAILLE_BUFFER - 1] = 0;
 }
 
 void ecritFichier(FILE *f, agenda_t *agenda) {
   agenda_t *cour = agenda;
   tache_t *courTache;
-  char buff[20];
+  char buff[TAILLE_BUFFER];
 
   if (f != NULL) {
     while (cour != NULL) {
@@ -221,23 +207,22 @@ void sauvFichier(char *nom, agenda_t *agenda) {
 /*****************************************************************************/
 
 void afficheTache(tache_t *taches) {
-  int i;
   tache_t *cour = taches;
 
   while (cour != NULL) {
-    printf("jour: %d\n", cour->j);
-    printf("heure: %s\n", cour->heure);
-    printf("nom: ");
-    for (i = 0; i < 10; ++i)
-      printf("%c", cour->nom[i]);
+    printf("|\t|  jour: %d\n", cour->j);
+    printf("|\t|  heure: %s\n", cour->heure);
+    printf("|\t|_ nom: %s", cour->nom);
     cour = cour->suiv;
+    if (cour != NULL)
+      printf("\n|\t|\n");
   }
 }
 
 /* affiche un élément de l'agenda */
 void afficheAgendaElt(agenda_t *agendaElt) {
-  printf("annee: %s\n", agendaElt->annee);
-  printf("semaine: %s\n", agendaElt->semaine);
+  printf("|  annee: %s\n", agendaElt->annee);
+  printf("|  semaine: %s\n", agendaElt->semaine);
   afficheTache(agendaElt->actions);
   printf("\n");
 }
@@ -247,10 +232,15 @@ void afficheAgenda(agenda_t *agenda) {
   int i = 0;
   agenda_t *cour = agenda;
 
+  system("clear");
+  printf("Agenda :\n");
+
   while (cour != NULL) {
-    printf("element %d:\n", i);
+    // printf("element %d:\n", i);
     afficheAgendaElt(cour);
+    printf("|_\n\n");
     cour = cour->suiv;
     ++i;
   }
+  printf("[Appuyer Entrer]");
 }
