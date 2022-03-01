@@ -27,6 +27,9 @@ agenda_t *gestionEvenements(char entree, agenda_t *agenda, int *continuer) {
   char heure[TAILLE_HEURE];
   char nom[TAILLE_NOM];
   char nomFichier[50] = "save_agenda.txt";
+  char motif[TAILLE_NOM];
+  tache_t **deb = NULL;
+  tache_t **fin = NULL;
 
   switch (entree) {
   case '0':
@@ -49,8 +52,6 @@ agenda_t *gestionEvenements(char entree, agenda_t *agenda, int *continuer) {
     scanf("%s%*c", nomFichier);
     if (entree == 3) {
       sauvFichier(nomFichier, agenda);
-      getchar();
-      flushInput();
     } else {
       if (demandeConfirmation()) {
         freelst(&agenda); // suppression de l'ancient agenda
@@ -59,11 +60,22 @@ agenda_t *gestionEvenements(char entree, agenda_t *agenda, int *continuer) {
       }
     }
     break;
+  case '5':
+    printf("Entreer motif:\n");
+    scanf("%s%*c", motif);
+    creerListeContigue(agenda, &deb, &fin, motif);
+    clear();
+    printf("Actions correspondants à \"%s\":\n", motif);
+    afficheListeContigue(deb, fin);
+    printf("[Appuyer Entrer]");
+    scanf("%*c");
+    break;
   default:
     afficheMessageFin();
     *continuer = 0;
     break;
   }
+  free(deb);
   return agenda;
 }
 

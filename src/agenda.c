@@ -84,6 +84,65 @@ agenda_t *ajouteAgenda(agenda_t *agenda, char annee[TAILLE_ANNEE],
   return agenda;
 }
 
+/* Trouve les jour où le nom de l'action correspond à `motif` et met l'addresse
+ * de la tache correspondante dans `deb`
+ * retourne le pointeur de fin de la liste `deb`
+ */
+tache_t **listeMotif(agenda_t *agenda, tache_t **deb, char *motif) {
+  agenda_t *cour_a = agenda;
+  tache_t *cour_t = NULL;
+  int i = 0;
+
+  printf("debug1\n");
+  // parcour de l'agenda
+  while (cour_a != NULL) {
+    cour_t = cour_a->actions;
+    printf("debug2\n");
+    // parcour de la liste d'actions
+    while (cour_t != NULL) {
+      printf("debug3\n");
+      // si le motif correspond, on ajoute l'ellement à la liste
+      if (motifCorrespond(motif, cour_t->nom)) {
+        deb[i] = cour_t;
+        ++i;
+      }
+      cour_t = cour_t->suiv;
+    }
+    cour_a = cour_a->suiv;
+  }
+  return deb + i; // on retourne la fin de la liste
+}
+
+/* Génère une liste contigue contenant les jours présents dans dans l'agenda où
+ * le nom de l'action contient `motif`
+ * La liste contigue est constituée d'un pointeur de début `deb` et d'un
+ * poineur de fin `fin`
+ * Allocation dynamique de taille `MAX_ESPACE_CONTIGU` pour la liste
+ */
+void creerListeContigue(agenda_t *agenda, tache_t ***deb, tache_t ***fin,
+                        char *motif) {
+  *deb = (tache_t **)malloc(MAX_ESPACE_CONTIGU * sizeof(tache_t *));
+  if (*deb != NULL) {
+    *fin = listeMotif(agenda, *deb, motif);
+  } else {
+    fprintf(stderr, "Error: impossible d'allouer l'espace contigu\n");
+  }
+}
+
+/* Affiche liste contigue de `tache_t*`
+ * `deb` est un pointeur sur le début de la liste et `fin` sur la fin de la
+ * liste.
+ */
+void afficheListeContigue(tache_t **deb, tache_t **fin) {
+  while (deb != fin) {
+    printf("jour: %d\n", (*deb)->j);
+    printf("heure: %s\n", (*deb)->heure);
+    printf("nom: %s\n", (*deb)->nom);
+    printf("\n");
+    ++deb;
+  }
+}
+
 /*****************************************************************************/
 /* FONCTIONS DU TP                                                           */
 /*****************************************************************************/

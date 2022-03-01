@@ -24,6 +24,9 @@ agenda_t *agendaViafichier(char *nom);
 agenda_t *ajouteAgenda(agenda_t *agenda, char annee[TAILLE_ANNEE],
                        char semaine[TAILLE_SEMAINE], jour_t jour, char heure[TAILLE_HEURE],
                        char nom[TAILLE_NOM]);
+void creerListeContigue(agenda_t *agenda, tache_t ***deb, tache_t ***fin,
+                        char *motif);
+void afficheListeContigue(tache_t **deb, tache_t **fin);
 void sauvFichier(char *nom, agenda_t *agenda);
 void ecritFichier(FILE *f, agenda_t *agenda);
 void agendaToString(agenda_t *agendaElt, char buff[]);

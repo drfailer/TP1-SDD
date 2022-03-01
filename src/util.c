@@ -31,6 +31,19 @@ void flushInput() {
     ;
 }
 
+int motifCorrespond(char *motif, char nom[TAILLE_NOM]) {
+  int i = 0;
+  int tailleMotif = strlen(motif);
+  int r = -1;
+
+  // on cherche le motif dans tous le mot
+  while (r && i + tailleMotif < TAILLE_NOM) {
+    r = strncmp(motif, nom + i, tailleMotif);
+    ++i;
+  }
+  return (r == 0);
+}
+
 /*****************************************************************************/
 /* FONCTIONS DE SAISIE                                                       */
 /*****************************************************************************/
@@ -100,6 +113,7 @@ void afficheMenu() {
   printf("\t|                [2]: Afficher l'agenda                |\n");
   printf("\t|                [3]: Sauvegarde l'agenda              |\n");
   printf("\t|                [4]: Importer un fichier              |\n");
+  printf("\t|                [5]: Recherche de motif               |\n");
   printf("\t|                [Autre]: Quitter                      |\n");
   printf("\t|                                                      |\n");
   printf("\t ------------------------------------------------------\n\n");
