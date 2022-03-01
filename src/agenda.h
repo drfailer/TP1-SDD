@@ -1,10 +1,9 @@
 #ifndef __AGENDA__
 #define __AGENDA__
 #include "tache.h"
+#include "util.h"
 #include <stdio.h>
 #include <stdlib.h>
-#define TAILLE_ANNEE 5
-#define TAILLE_SEMAINE 3
 
 /* STRUCTURES: */
 
@@ -25,8 +24,9 @@ agenda_t *agendaViafichier(char *nom);
 agenda_t *ajouteAgenda(agenda_t *agenda, char annee[TAILLE_ANNEE],
                        char semaine[TAILLE_SEMAINE], jour_t jour, char heure[TAILLE_HEURE],
                        char nom[TAILLE_NOM]);
-void ecritFichier(FILE *f, agenda_t *agenda);
 void sauvFichier(char *nom, agenda_t *agenda);
+void ecritFichier(FILE *f, agenda_t *agenda);
+void agendaToString(agenda_t *agendaElt, char buff[]);
 void afficheAgenda(agenda_t *agenda);
 void freelst(agenda_t **agenda);
 tache_t *supprimeTache(tache_t *tache, jour_t jour, char heure[3]);

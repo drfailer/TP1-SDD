@@ -1,11 +1,8 @@
 #include "agenda.h"
-#include "tache.h"
 #include "util.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#define TAILLE_BUFFER                                                          \
-  TAILLE_ANNEE + TAILLE_SEMAINE + TAILLE_HEURE + TAILLE_NOM - 1
 
 /*****************************************************************************/
 /* CONSTRUCTEUR ET DESTRUCTEUR                                               */
@@ -45,6 +42,9 @@ void freelst(agenda_t **agenda) {
 /* FONCTIONS DE MANIPULATION DE LA LISTE                                     */
 /*****************************************************************************/
 
+/* Permet d'extraire les informations d'une ligne lors de l'importation d'un
+ * fichier.
+ */
 void parseLigne(char *s, char annee[TAILLE_ANNEE], char semaine[TAILLE_SEMAINE],
                 jour_t *jour, char heure[TAILLE_HEURE], char nom[TAILLE_NOM]) {
   s = parseSuiteNombres(s, annee, TAILLE_ANNEE - 1);
@@ -106,14 +106,47 @@ agenda_t *agendaViafichier(char *nom) {
   if (f != NULL) {
     while (!feof(f)) {
       fgets(buff, TAILLE_BUFFER, f);
+      printf("buff: %s\n", buff);
       parseLigne(buff, annee, semaine, &jour, heure, nomAction);
       agenda = ajouteAgenda(agenda, annee, semaine, jour, heure, nomAction);
     }
     fclose(f);
+    afficheAgenda(agenda);
   } else {
     fprintf(stderr, "ERREUR: ouverture de fichier.");
   }
   return agenda;
+}
+
+void ecritFichier(FILE *f, agenda_t *agenda) {
+  agenda_t *cour = agenda;
+  tache_t *courTache;
+  char buff[TAILLE_BUFFER];
+
+  if (f != NULL) {
+    while (cour != NULL) {
+      agendaToString(cour, buff);
+      courTache = cour->actions;
+      while (courTache != NULL) {
+        tacheToString(courTache, buff);
+        fprintf(f, "%s\n", buff);
+        courTache = courTache->suiv;
+      }
+      cour = cour->suiv;
+    }
+  }
+}
+
+/* Ouvrer le fichier `nom` en mode écriture et utilise la fonction
+ * `ecritFichier` pour sauvegarder l'agenda courant dedans
+ */
+void sauvFichier(char *nom, agenda_t *agenda) {
+  FILE *f = fopen(nom, "w");
+  if (f != NULL) {
+    ecritFichier(f, agenda);
+  } else {
+    fprintf(stderr, "ERREUR: impossible d'ouvrir fihcier de sauvegarde.");
+  }
 }
 
 /*****************************************************************************/
@@ -165,59 +198,14 @@ int compAgendaElt(agenda_t *elt, char annee[TAILLE_ANNEE],
   return resultat;
 }
 
-void tacheToString(tache_t *tache, char buff[]) {
-  buff[TAILLE_ANNEE + TAILLE_SEMAINE - 2] = tache->j + '0';
-  buff[TAILLE_ANNEE + TAILLE_SEMAINE - 1] = 0;
-  strcat(buff, tache->heure);
-  strncat(buff, tache->nom, TAILLE_NOM);
-  buff[TAILLE_BUFFER - 1] = 0;
-}
-
-void ecritFichier(FILE *f, agenda_t *agenda) {
-  agenda_t *cour = agenda;
-  tache_t *courTache;
-  char buff[TAILLE_BUFFER];
-
-  if (f != NULL) {
-    while (cour != NULL) {
-      strcpy(buff, cour->annee);
-      strcat(buff, cour->semaine);
-      courTache = cour->actions;
-      while (courTache != NULL) {
-        tacheToString(courTache, buff);
-        fprintf(f, "%s\n", buff);
-        courTache = courTache->suiv;
-      }
-      cour = cour->suiv;
-    }
-  }
-}
-
-void sauvFichier(char *nom, agenda_t *agenda) {
-  FILE *f = fopen(nom, "w");
-  if (f != NULL) {
-    ecritFichier(f, agenda);
-  } else {
-    fprintf(stderr, "ERREUR: impossible d'ouvrir fihcier de sauvegarde.");
-  }
+void agendaToString(agenda_t *agendaElt, char buff[]) {
+  strcpy(buff, agendaElt->annee);
+  strcat(buff, agendaElt->semaine);
 }
 
 /*****************************************************************************/
 /* FONCTION D'AFFICHAGE                                                     */
 /*****************************************************************************/
-
-void afficheTache(tache_t *taches) {
-  tache_t *cour = taches;
-
-  while (cour != NULL) {
-    printf("|\t|  jour: %d\n", cour->j);
-    printf("|\t|  heure: %s\n", cour->heure);
-    printf("|\t|_ nom: %s", cour->nom);
-    cour = cour->suiv;
-    if (cour != NULL)
-      printf("\n|\t|\n");
-  }
-}
 
 /* affiche un élément de l'agenda */
 void afficheAgendaElt(agenda_t *agendaElt) {
@@ -232,7 +220,7 @@ void afficheAgenda(agenda_t *agenda) {
   int i = 0;
   agenda_t *cour = agenda;
 
-  system("clear");
+  clear();
   printf("Agenda :\n");
 
   while (cour != NULL) {

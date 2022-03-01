@@ -1,7 +1,6 @@
 #ifndef __TACHE__
 #define __TACHE__
-#define TAILLE_NOM 11
-#define TAILLE_HEURE 3
+#include "util.h"
 
 typedef enum {
   LUNDI = 1,
@@ -23,6 +22,8 @@ typedef struct tache {
 
 tache_t *creeTache(char j, char heure[TAILLE_HEURE], char nom[TAILLE_NOM]);
 int compTache(tache_t *elt, char j, char heure[TAILLE_HEURE]);
+void tacheToString(tache_t *tache, char buff[]);
+void afficheTache(tache_t *taches);
 tache_t *ajouteTache(tache_t *tache, jour_t jour, char heure[TAILLE_HEURE], char nom[TAILLE_NOM]);
 tache_t *supprimeTache(tache_t *tache, jour_t jour, char heure[TAILLE_HEURE]);
 void freeTache(tache_t **tache);

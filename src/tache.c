@@ -1,5 +1,6 @@
 #include "tache.h"
 #include "util.h"
+#include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 
@@ -100,3 +101,27 @@ int compTache(tache_t *elt, char j, char heure[TAILLE_HEURE]) {
   }
   return resultat;
 }
+
+// TODO: move this in `tache.c`
+void tacheToString(tache_t *tache, char buff[]) {
+  buff[TAILLE_ANNEE + TAILLE_SEMAINE - 2] = tache->j + '0';
+  buff[TAILLE_ANNEE + TAILLE_SEMAINE - 1] = 0;
+  strcat(buff, tache->heure);
+  strncat(buff, tache->nom, TAILLE_NOM);
+  buff[TAILLE_BUFFER - 1] = 0;
+}
+
+// TODO: move this in `tache.c`
+void afficheTache(tache_t *taches) {
+  tache_t *cour = taches;
+
+  while (cour != NULL) {
+    printf("|\t|  jour: %d\n", cour->j);
+    printf("|\t|  heure: %s\n", cour->heure);
+    printf("|\t|_ nom: %s", cour->nom);
+    cour = cour->suiv;
+    if (cour != NULL)
+      printf("\n|\t|\n");
+  }
+}
+
