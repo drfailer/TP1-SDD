@@ -6,9 +6,14 @@ TP de structures de données.
 TODOS:
 ------
 
-- [x] parser ligne fichier
-- [x] ajout trié
-- [ ] faire plus de tests sur ajout
-- [x] parser doc
-- [ ] sauvegarde
-- [ ] suppression
+- [X] parser ligne fichier
+- [X] parser doc
+- [X] ajout trié
+- [X] liberation memoire
+- [X] sauvegarde
+- [X] suppression
+- [X] fonction liste contigue motif
+- [ ] systéme de test
+- [ ] faire plus de test
+- [ ] ajout d'un mode test pour ne pas afficher tout le menu lors des tests
+- [ ] reorganisation des fonctions (certaines sont pas dans les bon fichiers)
