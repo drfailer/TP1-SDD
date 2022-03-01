@@ -1,0 +1,28 @@
+#!/usr/bin/env bash
+
+# Variables
+IN=./fichiers-entree
+OUT=./fichiers-sortie
+AF=./fichiers-agenda
+SF=./fichiers-sauvegarde
+VAL=./sortie-valgrind
+
+# simple test d'ouverture de fichier
+test0() {
+  valgrind ../prog import $AF/agenda0.txt < $IN/test_save.in > $OUT/aff_test0.txt 2> $VAL/valgrind_test0.txt
+}
+
+# simple test d'ouverture de fichier
+test1() {
+  ../prog import $AF/agenda0.txt < $IN/affiche.in > $OUT/aff_test1.txt
+}
+
+# simple test d'ouverture de fichier
+test2() {
+  valgrind ../prog import $AF/agenda0.txt < $IN/insert_spr.in > $OUT/aff_test2.txt 2> $VAL/valgrind_test2.txt
+}
+
+# execution des tests
+test0
+test1
+test2

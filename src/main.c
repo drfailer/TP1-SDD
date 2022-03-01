@@ -50,7 +50,7 @@ agenda_t *gestionEvenements(char entree, agenda_t *agenda, int *continuer) {
     clear();
     printf("Saisir nom du fichier\n");
     scanf("%s%*c", nomFichier);
-    if (entree == 3) {
+    if (entree == '3') {
       sauvFichier(nomFichier, agenda);
     } else {
       if (demandeConfirmation()) {

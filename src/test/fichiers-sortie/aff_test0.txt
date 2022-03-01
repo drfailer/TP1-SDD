@@ -1,0 +1,66 @@
+importation de ./fichiers-agenda/agenda0.txt.
+
+	 ======================================================
+	|                                                      |
+	|                         AGENDA                       |
+	|                                                      |
+	 ======================================================
+	|                                                      |
+	|                [0]: Ajout element                    |
+	|                [1]: Suppression element              |
+	|                [2]: Afficher l'agenda                |
+	|                [3]: Sauvegarde l'agenda              |
+	|                [4]: Importer un fichier              |
+	|                [5]: Recherche de motif               |
+	|                [Autre]: Quitter                      |
+	|                                                      |
+	 ------------------------------------------------------
+
+reponse: 0
+Saisir annee:
+Saisir semaine:
+Saisir jour:
+Saisir heure:
+Saisir l'activité :
+
+	 ======================================================
+	|                                                      |
+	|                         AGENDA                       |
+	|                                                      |
+	 ======================================================
+	|                                                      |
+	|                [0]: Ajout element                    |
+	|                [1]: Suppression element              |
+	|                [2]: Afficher l'agenda                |
+	|                [3]: Sauvegarde l'agenda              |
+	|                [4]: Importer un fichier              |
+	|                [5]: Recherche de motif               |
+	|                [Autre]: Quitter                      |
+	|                                                      |
+	 ------------------------------------------------------
+
+reponse: 3
+Saisir nom du fichier
+
+	 ======================================================
+	|                                                      |
+	|                         AGENDA                       |
+	|                                                      |
+	 ======================================================
+	|                                                      |
+	|                [0]: Ajout element                    |
+	|                [1]: Suppression element              |
+	|                [2]: Afficher l'agenda                |
+	|                [3]: Sauvegarde l'agenda              |
+	|                [4]: Importer un fichier              |
+	|                [5]: Recherche de motif               |
+	|                [Autre]: Quitter                      |
+	|                                                      |
+	 ------------------------------------------------------
+
+reponse: q
+	 ======================================================
+	|                                                      |
+	|                      AU REVOIR !                     |
+	|                                                      |
+	 ======================================================

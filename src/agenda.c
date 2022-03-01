@@ -165,12 +165,10 @@ agenda_t *agendaViafichier(char *nom) {
   if (f != NULL) {
     while (!feof(f)) {
       fgets(buff, TAILLE_BUFFER, f);
-      printf("buff: %s\n", buff);
       parseLigne(buff, annee, semaine, &jour, heure, nomAction);
       agenda = ajouteAgenda(agenda, annee, semaine, jour, heure, nomAction);
     }
     fclose(f);
-    afficheAgenda(agenda);
   } else {
     fprintf(stderr, "ERREUR: ouverture de fichier.");
   }
@@ -203,6 +201,7 @@ void sauvFichier(char *nom, agenda_t *agenda) {
   FILE *f = fopen(nom, "w");
   if (f != NULL) {
     ecritFichier(f, agenda);
+    fclose(f);
   } else {
     fprintf(stderr, "ERREUR: impossible d'ouvrir fihcier de sauvegarde.");
   }

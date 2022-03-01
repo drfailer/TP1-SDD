@@ -1,0 +1,220 @@
+importation de ./fichiers-agenda/agenda0.txt.
+
+	 ======================================================
+	|                                                      |
+	|                         AGENDA                       |
+	|                                                      |
+	 ======================================================
+	|                                                      |
+	|                [0]: Ajout element                    |
+	|                [1]: Suppression element              |
+	|                [2]: Afficher l'agenda                |
+	|                [3]: Sauvegarde l'agenda              |
+	|                [4]: Importer un fichier              |
+	|                [5]: Recherche de motif               |
+	|                [Autre]: Quitter                      |
+	|                                                      |
+	 ------------------------------------------------------
+
+reponse: 0
+Saisir annee:
+Saisir semaine:
+Saisir jour:
+Saisir heure:
+Saisir l'activité :
+
+	 ======================================================
+	|                                                      |
+	|                         AGENDA                       |
+	|                                                      |
+	 ======================================================
+	|                                                      |
+	|                [0]: Ajout element                    |
+	|                [1]: Suppression element              |
+	|                [2]: Afficher l'agenda                |
+	|                [3]: Sauvegarde l'agenda              |
+	|                [4]: Importer un fichier              |
+	|                [5]: Recherche de motif               |
+	|                [Autre]: Quitter                      |
+	|                                                      |
+	 ------------------------------------------------------
+
+reponse: 0
+Saisir annee:
+Saisir semaine:
+Saisir jour:
+Saisir heure:
+Saisir l'activité :
+
+	 ======================================================
+	|                                                      |
+	|                         AGENDA                       |
+	|                                                      |
+	 ======================================================
+	|                                                      |
+	|                [0]: Ajout element                    |
+	|                [1]: Suppression element              |
+	|                [2]: Afficher l'agenda                |
+	|                [3]: Sauvegarde l'agenda              |
+	|                [4]: Importer un fichier              |
+	|                [5]: Recherche de motif               |
+	|                [Autre]: Quitter                      |
+	|                                                      |
+	 ------------------------------------------------------
+
+reponse: 0
+Saisir annee:
+Saisir semaine:
+Saisir jour:
+Saisir heure:
+Saisir l'activité :
+
+	 ======================================================
+	|                                                      |
+	|                         AGENDA                       |
+	|                                                      |
+	 ======================================================
+	|                                                      |
+	|                [0]: Ajout element                    |
+	|                [1]: Suppression element              |
+	|                [2]: Afficher l'agenda                |
+	|                [3]: Sauvegarde l'agenda              |
+	|                [4]: Importer un fichier              |
+	|                [5]: Recherche de motif               |
+	|                [Autre]: Quitter                      |
+	|                                                      |
+	 ------------------------------------------------------
+
+reponse: 0
+Saisir annee:
+Saisir semaine:
+Saisir jour:
+Saisir heure:
+Saisir l'activité :
+
+	 ======================================================
+	|                                                      |
+	|                         AGENDA                       |
+	|                                                      |
+	 ======================================================
+	|                                                      |
+	|                [0]: Ajout element                    |
+	|                [1]: Suppression element              |
+	|                [2]: Afficher l'agenda                |
+	|                [3]: Sauvegarde l'agenda              |
+	|                [4]: Importer un fichier              |
+	|                [5]: Recherche de motif               |
+	|                [Autre]: Quitter                      |
+	|                                                      |
+	 ------------------------------------------------------
+
+reponse: 1
+Saisir annee:
+Saisir semaine:
+Saisir jour:
+Saisir heure:
+
+	 ======================================================
+	|                                                      |
+	|                         AGENDA                       |
+	|                                                      |
+	 ======================================================
+	|                                                      |
+	|                [0]: Ajout element                    |
+	|                [1]: Suppression element              |
+	|                [2]: Afficher l'agenda                |
+	|                [3]: Sauvegarde l'agenda              |
+	|                [4]: Importer un fichier              |
+	|                [5]: Recherche de motif               |
+	|                [Autre]: Quitter                      |
+	|                                                      |
+	 ------------------------------------------------------
+
+reponse: 1
+Saisir annee:
+Saisir semaine:
+Saisir jour:
+Saisir heure:
+
+	 ======================================================
+	|                                                      |
+	|                         AGENDA                       |
+	|                                                      |
+	 ======================================================
+	|                                                      |
+	|                [0]: Ajout element                    |
+	|                [1]: Suppression element              |
+	|                [2]: Afficher l'agenda                |
+	|                [3]: Sauvegarde l'agenda              |
+	|                [4]: Importer un fichier              |
+	|                [5]: Recherche de motif               |
+	|                [Autre]: Quitter                      |
+	|                                                      |
+	 ------------------------------------------------------
+
+reponse: 2
+Agenda :
+|  annee: 2024
+|  semaine: 08
+|	|  jour: 2
+|	|  heure: 08
+|	|_ nom: TEST
+|_
+
+|  annee: 2022
+|  semaine: 10
+|	|  jour: 1
+|	|  heure: 08
+|	|_ nom: Proba     
+|_
+
+|  annee: 2022
+|  semaine: 15
+|	|  jour: 1
+|	|  heure: 07
+|	|_ nom: DEB_ACT
+|	|
+|	|  jour: 2
+|	|  heure: 11
+|	|_ nom: MID_ACT
+|	|
+|	|  jour: 4
+|	|  heure: 08
+|	|_ nom: Foot      
+|	|
+|	|  jour: 4
+|	|  heure: 12
+|	|_ nom: FIN_ACT
+|_
+
+|  annee: 2021
+|  semaine: 12
+|	|  jour: 2
+|	|  heure: 12
+|	|_ nom: C         
+|_
+
+[Appuyer Entrer]
+	 ======================================================
+	|                                                      |
+	|                         AGENDA                       |
+	|                                                      |
+	 ======================================================
+	|                                                      |
+	|                [0]: Ajout element                    |
+	|                [1]: Suppression element              |
+	|                [2]: Afficher l'agenda                |
+	|                [3]: Sauvegarde l'agenda              |
+	|                [4]: Importer un fichier              |
+	|                [5]: Recherche de motif               |
+	|                [Autre]: Quitter                      |
+	|                                                      |
+	 ------------------------------------------------------
+
+reponse: 
+
+	 ======================================================
+	|                                                      |
+	|                      AU REVOIR !                     |
+	|                                                      |
+	 ======================================================

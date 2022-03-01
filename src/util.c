@@ -102,6 +102,7 @@ char demandeConfirmation() {
  */
 void afficheMenu() {
   clear();
+  printf("\n");
   printf("\t ======================================================\n");
   printf("\t|                                                      |\n");
   printf("\t|                         AGENDA                       |\n");

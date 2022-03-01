@@ -1,0 +1,76 @@
+importation de ./fichiers-agenda/agenda0.txt.
+
+	 ======================================================
+	|                                                      |
+	|                         AGENDA                       |
+	|                                                      |
+	 ======================================================
+	|                                                      |
+	|                [0]: Ajout element                    |
+	|                [1]: Suppression element              |
+	|                [2]: Afficher l'agenda                |
+	|                [3]: Sauvegarde l'agenda              |
+	|                [4]: Importer un fichier              |
+	|                [5]: Recherche de motif               |
+	|                [Autre]: Quitter                      |
+	|                                                      |
+	 ------------------------------------------------------
+
+reponse: 2
+Agenda :
+|  annee: 2022
+|  semaine: 10
+|	|  jour: 1
+|	|  heure: 08
+|	|_ nom: Proba     
+|_
+
+|  annee: 2022
+|  semaine: 15
+|	|  jour: 1
+|	|  heure: 08
+|	|_ nom: TPs de SDD
+|	|
+|	|  jour: 4
+|	|  heure: 08
+|	|_ nom: Foot      
+|_
+
+|  annee: 2021
+|  semaine: 12
+|	|  jour: 2
+|	|  heure: 12
+|	|_ nom: C         
+|_
+
+|  annee: 2021
+|  semaine: 45
+|	|  jour: 2
+|	|  heure: 10
+|	|_ nom: Manger    
+|_
+
+[Appuyer Entrer]
+	 ======================================================
+	|                                                      |
+	|                         AGENDA                       |
+	|                                                      |
+	 ======================================================
+	|                                                      |
+	|                [0]: Ajout element                    |
+	|                [1]: Suppression element              |
+	|                [2]: Afficher l'agenda                |
+	|                [3]: Sauvegarde l'agenda              |
+	|                [4]: Importer un fichier              |
+	|                [5]: Recherche de motif               |
+	|                [Autre]: Quitter                      |
+	|                                                      |
+	 ------------------------------------------------------
+
+reponse: 
+
+	 ======================================================
+	|                                                      |
+	|                      AU REVOIR !                     |
+	|                                                      |
+	 ======================================================

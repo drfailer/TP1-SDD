@@ -1,0 +1,36 @@
+#!/usr/bin/env bash
+
+generate_elt() {
+  year=$(( ($RANDOM % 10) + 2022 ))
+  week=$(($RANDOM % 52))
+  day=$(( ($RANDOM % 7) + 1 ))
+  hour=$(($RANDOM % 24))
+  line="$year"
+  if [ $week -lt 10 ]; then
+    line+="0"
+  fi
+  line+="$week$day"
+  if [ $hour -lt 10 ]; then
+    line+="0"
+  fi
+  line+="$hour"
+  line+="Test_$1"
+  nb_of_sp=$(( 20 - $(echo "$line" | wc -c) ))
+  for ((j=0; j < $nb_of_sp; j++))
+  do
+    line+="_"
+  done
+  printf "%s\n" $line >> $2
+}
+
+
+if [ $# -eq 2 ]
+then
+  for ((i=0; i < $2; i++))
+  do
+    generate_elt $i $1
+  done
+else
+  echo "error: wrong number of arguments."
+  echo "usage: generate-agenda [filename.txt] [number_of_elements]"
+fi

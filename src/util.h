@@ -1,6 +1,6 @@
 #ifndef __UTIL__
 #define __UTIL__
-#define DEBUG 0
+#define DEBUG 1
 #define MAX_ESPACE_CONTIGU 30
 #define TAILLE_ANNEE 5
 #define TAILLE_SEMAINE 3
