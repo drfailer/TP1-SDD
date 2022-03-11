@@ -1,31 +1,31 @@
-==1133897== Memcheck, a memory error detector
-==1133897== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
-==1133897== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
-==1133897== Command: ../prog import ./fichiers-agenda/agenda0.txt
-==1133897== 
-==1133897== Conditional jump or move depends on uninitialised value(s)
-==1133897==    at 0x484BE87: strcpy (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
-==1133897==    by 0x10A0F8: creeTache (tache.c:17)
-==1133897==    by 0x10A1EA: ajouteTache (tache.c:58)
-==1133897==    by 0x10951C: ajouteAgenda (agenda.c:82)
-==1133897==    by 0x1097D0: agendaViafichier (agenda.c:169)
-==1133897==    by 0x10A063: main (main.c:101)
-==1133897== 
-==1133897== Conditional jump or move depends on uninitialised value(s)
-==1133897==    at 0x484BE87: strcpy (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
-==1133897==    by 0x10A0F8: creeTache (tache.c:17)
-==1133897==    by 0x10A1EA: ajouteTache (tache.c:58)
-==1133897==    by 0x1094C3: ajouteAgenda (agenda.c:75)
-==1133897==    by 0x1097D0: agendaViafichier (agenda.c:169)
-==1133897==    by 0x10A063: main (main.c:101)
-==1133897== 
-==1133897== 
-==1133897== HEAP SUMMARY:
-==1133897==     in use at exit: 0 bytes in 0 blocks
-==1133897==   total heap usage: 18 allocs, 18 frees, 13,168 bytes allocated
-==1133897== 
-==1133897== All heap blocks were freed -- no leaks are possible
-==1133897== 
-==1133897== Use --track-origins=yes to see where uninitialised values come from
-==1133897== For lists of detected and suppressed errors, rerun with: -s
-==1133897== ERROR SUMMARY: 5 errors from 2 contexts (suppressed: 0 from 0)
+==1146907== Memcheck, a memory error detector
+==1146907== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==1146907== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+==1146907== Command: ../prog import ./fichiers-agenda/agenda0.txt
+==1146907== 
+==1146907== Conditional jump or move depends on uninitialised value(s)
+==1146907==    at 0x484BE87: strcpy (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==1146907==    by 0x10A0F8: creeTache (tache.c:17)
+==1146907==    by 0x10A1EA: ajouteTache (tache.c:58)
+==1146907==    by 0x10951C: ajouteAgenda (agenda.c:82)
+==1146907==    by 0x1097D0: agendaViafichier (agenda.c:169)
+==1146907==    by 0x10A063: main (main.c:101)
+==1146907== 
+==1146907== Conditional jump or move depends on uninitialised value(s)
+==1146907==    at 0x484BE87: strcpy (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==1146907==    by 0x10A0F8: creeTache (tache.c:17)
+==1146907==    by 0x10A1EA: ajouteTache (tache.c:58)
+==1146907==    by 0x1094C3: ajouteAgenda (agenda.c:75)
+==1146907==    by 0x1097D0: agendaViafichier (agenda.c:169)
+==1146907==    by 0x10A063: main (main.c:101)
+==1146907== 
+==1146907== 
+==1146907== HEAP SUMMARY:
+==1146907==     in use at exit: 0 bytes in 0 blocks
+==1146907==   total heap usage: 18 allocs, 18 frees, 13,168 bytes allocated
+==1146907== 
+==1146907== All heap blocks were freed -- no leaks are possible
+==1146907== 
+==1146907== Use --track-origins=yes to see where uninitialised values come from
+==1146907== For lists of detected and suppressed errors, rerun with: -s
+==1146907== ERROR SUMMARY: 5 errors from 2 contexts (suppressed: 0 from 0)
